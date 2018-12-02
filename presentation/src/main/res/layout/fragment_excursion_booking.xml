@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="by.a750mm.excursionsapp750mm.presentation.screen.excursion.booking.ExcursionBookingViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/backgroudWhite">
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="20dp">
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:layout_width="269dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:text="@{viewModel.name}"
+                android:textColor="@color/textColor"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.506"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/dateTextView"
+                android:layout_width="97dp"
+                android:layout_height="29dp"
+                android:layout_marginTop="20dp"
+                android:text="@{viewModel.date}"
+                android:textColor="@color/textColor"
+                app:layout_constraintStart_toStartOf="@+id/nameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/nameTextView" />
+
+            <TextView
+                android:id="@+id/formTextView"
+                android:layout_width="178dp"
+                android:layout_height="29dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="24dp"
+                android:text="@string/form"
+                android:textColor="@color/textColor"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.373"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/dateTextView" />
+
+            <TextView
+                android:id="@+id/customerNameTextView"
+                android:layout_width="105dp"
+                android:layout_height="22dp"
+                android:layout_marginStart="24dp"
+                android:text="@string/name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/customerNameEditText" />
+
+            <TextView
+                android:id="@+id/customerSurnameTextView"
+                android:layout_width="105dp"
+                android:layout_height="22dp"
+                android:text="@string/surnamre"
+                app:layout_constraintStart_toStartOf="@+id/customerNameTextView"
+                app:layout_constraintTop_toTopOf="@+id/customerSurameEditText" />
+
+            <TextView
+                android:id="@+id/numberTextView"
+                android:layout_width="105dp"
+                android:layout_height="22dp"
+                android:text="@string/number"
+                app:layout_constraintStart_toStartOf="@+id/customerSurnameTextView"
+                app:layout_constraintTop_toTopOf="@+id/numberEditText" />
+
+            <TextView
+                android:id="@+id/emailTextView"
+                android:layout_width="105dp"
+                android:layout_height="22dp"
+                android:text="@string/email"
+                app:layout_constraintStart_toStartOf="@+id/numberTextView"
+                app:layout_constraintTop_toTopOf="@+id/emailEditText" />
+
+            <TextView
+                android:id="@+id/seatsTextView"
+                android:layout_width="105dp"
+                android:layout_height="22dp"
+                android:text="@string/seats"
+                app:layout_constraintStart_toStartOf="@+id/emailTextView"
+                app:layout_constraintTop_toTopOf="@+id/seatsEditText" />
+
+            <TextView
+                android:id="@+id/noteTextView"
+                android:layout_width="105dp"
+                android:layout_height="22dp"
+                android:text="@string/note"
+                app:layout_constraintStart_toStartOf="@+id/seatsTextView"
+                app:layout_constraintTop_toTopOf="@+id/noteEditText" />
+
+            <EditText
+                android:id="@+id/customerNameEditText"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:background="@color/white_opacity"
+                android:text="@={viewModel.customerName}"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/customerNameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/formTextView" />
+
+            <EditText
+                android:id="@+id/customerSurameEditText"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white_opacity"
+                android:text="@={viewModel.customerSurname}"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/customerSurnameTextView"
+                app:layout_constraintTop_toBottomOf="@+id/customerNameEditText" />
+
+            <EditText
+                android:id="@+id/numberEditText"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white_opacity"
+                android:text="@={viewModel.number}"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/numberTextView"
+                app:layout_constraintTop_toBottomOf="@+id/customerSurameEditText" />
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="162dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white_opacity"
+                android:inputType="textEmailAddress"
+                android:text="@={viewModel.email}"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/emailTextView"
+                app:layout_constraintTop_toBottomOf="@+id/numberEditText" />
+
+            <EditText
+                android:id="@+id/seatsEditText"
+                android:layout_width="wrap_content"
+                android:layout_height="17dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white_opacity"
+                android:inputType="number"
+                android:text="@={viewModel.seatsBook}"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/buttonMinus"
+                app:layout_constraintTop_toBottomOf="@+id/emailEditText" />
+
+            <EditText
+                android:id="@+id/noteEditText"
+                android:layout_width="173dp"
+                android:layout_height="109dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="@color/white_opacity"
+                android:gravity="top"
+                android:inputType="textLongMessage"
+                android:text="@={viewModel.note}"
+                android:textSize="12sp"
+                app:layout_constraintStart_toEndOf="@+id/noteTextView"
+                app:layout_constraintTop_toBottomOf="@+id/seatsEditText" />
+
+            <Button
+                android:id="@+id/bookButton"
+                android:layout_width="wrap_content"
+                android:layout_height="37dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="16dp"
+                android:onClick="@{() -> viewModel.onClickBook()}"
+                android:text="@string/book"
+                android:textSize="12sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/noteEditText" />
+
+            <TextView
+                android:id="@+id/seatsRestTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="29dp"
+                android:layout_marginStart="28dp"
+                android:text="@{`Осталось мест: `+viewModel.seats}"
+                app:layout_constraintStart_toEndOf="@+id/dateTextView"
+                app:layout_constraintTop_toTopOf="@+id/dateTextView" />
+
+            <Button
+                android:id="@+id/buttonMinus"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/round_delete_button"
+                android:onClick="@{() -> viewModel.onClickMinus()}"
+                app:layout_constraintStart_toEndOf="@+id/seatsTextView"
+                app:layout_constraintTop_toTopOf="@+id/seatsTextView" />
+
+            <Button
+                android:id="@+id/buttonPlus"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_marginStart="20dp"
+                android:background="@drawable/round_add_button"
+                android:onClick="@{() -> viewModel.onClickPlus()}"
+                app:layout_constraintStart_toEndOf="@+id/seatsEditText"
+                app:layout_constraintTop_toTopOf="@+id/buttonMinus" />
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
+</layout>

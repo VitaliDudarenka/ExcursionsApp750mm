@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">750mm.by</string>
+    <string name="search">Search</string>
+    <string name="go">Я еду!</string>
+    <string name="name">Имя *</string>
+    <string name="surnamre">Фамилия *</string>
+    <string name="email">E-mail *</string>
+    <string name="number">Телефон *</string>
+    <string name="seats">Количество *</string>
+    <string name="note">Пожелания</string>
+    <string name="book">Забронировать</string>
+    <string name="form">Заполните форму:</string>
+</resources>
