@@ -1,13 +1,16 @@
 package by.a750mm.excursionsapp750mm.presentation.screen.excursion.list
 
 import android.arch.lifecycle.ViewModelProviders
+import android.databinding.DataBindingUtil.setContentView
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import android.widget.TextView
 import by.a750mm.excursionsapp750mm.R
 import by.a750mm.excursionsapp750mm.databinding.FragmentExcursionListBinding
 import by.a750mm.excursionsapp750mm.presentation.base.BaseMvvmFragment
 import by.a750mm.excursionsapp750mm.presentation.screen.excursion.ExcursionRouter
+import kotlinx.android.synthetic.main.fragment_excursion_list.*
 
 
 class ExcursionListFragment : BaseMvvmFragment<ExcursionListViewModel, ExcursionRouter, FragmentExcursionListBinding>() {
@@ -29,12 +32,14 @@ class ExcursionListFragment : BaseMvvmFragment<ExcursionListViewModel, Excursion
         binding.listRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.listRecyclerView.setHasFixedSize(true)
 
+
     }
 
 
-    override fun onDetach() {
-        super.onDetach()
+    override fun onDestroy() {
+        super.onDestroy()
         viewModel.dismissAdapter()
+        listRecyclerView.adapter = null
     }
 
 }

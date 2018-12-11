@@ -31,7 +31,7 @@
                 android:layout_marginTop="16dp"
                 android:scaleType="centerCrop"
                 app:imageUrl="@{viewModel.imgUrl}"
-                app:layout_constraintEnd_toStartOf="@+id/mapView"
+                app:layout_constraintEnd_toStartOf="@+id/mapViewDetails"
                 app:layout_constraintHorizontal_bias="0.566"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nameDetails" />
@@ -142,7 +142,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/dateDetails" />
 
             <com.google.android.gms.maps.MapView
-                android:id="@+id/mapView"
+                android:id="@+id/mapViewDetails"
                 android:name="com.google.android.gms.maps.SupportMapFragment"
                 android:layout_width="143dp"
                 android:layout_height="169dp"

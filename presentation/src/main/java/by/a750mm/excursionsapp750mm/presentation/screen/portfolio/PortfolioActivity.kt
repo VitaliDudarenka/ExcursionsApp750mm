@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import by.a750mm.excursionsapp750mm.presentation.base.BaseMvvmActivity
 import android.databinding.DataBindingUtil
+import android.widget.TextView
 import by.a750mm.excursionsapp750mm.R
 import by.a750mm.excursionsapp750mm.databinding.ActivityExcursionBinding
 import by.a750mm.excursionsapp750mm.databinding.ActivityPortfolioBinding
@@ -12,6 +13,7 @@ import by.a750mm.excursionsapp750mm.presentation.screen.excursion.ExcursionActiv
 import by.a750mm.excursionsapp750mm.presentation.screen.excursion.ExcursionRouter
 import by.a750mm.excursionsapp750mm.presentation.screen.excursion.ExcursionViewModel
 import by.a750mm.excursionsapp750mm.presentation.screen.map.MapActivity
+import by.a750mm.excursionsapp750mm.presentation.utils.visibility
 import kotlinx.android.synthetic.main.activity_portfolio.*
 
 
@@ -40,6 +42,8 @@ class PortfolioActivity : BaseMvvmActivity<PortfolioViewModel, PortfolioRouter, 
             val intent = Intent(this, MapActivity::class.java)
             startActivity(intent)
         }
+        val titleTextView = findViewById<TextView>(R.id.titleTextView)
+        titleTextView.text = "СМИ о нас"
     }
 
 

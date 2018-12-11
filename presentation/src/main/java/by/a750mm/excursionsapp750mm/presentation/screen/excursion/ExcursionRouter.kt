@@ -1,20 +1,26 @@
 package by.a750mm.excursionsapp750mm.presentation.screen.excursion
 
-import android.content.Intent
-import android.support.v4.content.ContextCompat
-import android.support.v4.content.ContextCompat.startActivity
 import android.view.View
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import by.a750mm.excursionsapp750mm.R
 import by.a750mm.excursionsapp750mm.presentation.base.BaseRouter
 import by.a750mm.excursionsapp750mm.presentation.screen.excursion.booking.ExcursionBookingFragment
 import by.a750mm.excursionsapp750mm.presentation.screen.excursion.details.ExcursionDetailsFragment
 import by.a750mm.excursionsapp750mm.presentation.screen.excursion.list.ExcursionListFragment
-import by.a750mm.excursionsapp750mm.presentation.screen.map.MapActivity
+import by.a750mm.excursionsapp750mm.presentation.utils.visibility
 
 class ExcursionRouter(activity: ExcursionActivity) : BaseRouter<ExcursionActivity>(activity) {
+
+
     fun goToExcursionList() {
         replaceFragment(activity.supportFragmentManager, ExcursionListFragment.getInstance(), R.id.container, false)
+        val goBackImageButton: ImageButton = activity.findViewById<ImageButton>(R.id.goBackImageButton)
+        val titleTextView: TextView = activity.findViewById<TextView>(R.id.titleTextView)
+        goBackImageButton.visibility(false)
+        titleTextView.text = "750MM.BY"
     }
 
     fun goToExcursionDetails(id: String) {
@@ -24,6 +30,13 @@ class ExcursionRouter(activity: ExcursionActivity) : BaseRouter<ExcursionActivit
         } else {
             replaceFragment(activity.supportFragmentManager, ExcursionDetailsFragment.getInstance(id),
                     R.id.containerDetails, false)
+        }
+        val goBackImageButton: ImageButton = activity.findViewById<ImageButton>(R.id.goBackImageButton)
+        val titleTextView: TextView = activity.findViewById<TextView>(R.id.titleTextView)
+        titleTextView.text = "750MM.BY"
+        goBackImageButton.visibility(true)
+        goBackImageButton.setOnClickListener {
+            goToExcursionList()
         }
 
     }
@@ -35,6 +48,13 @@ class ExcursionRouter(activity: ExcursionActivity) : BaseRouter<ExcursionActivit
         } else {
             replaceFragment(activity.supportFragmentManager, ExcursionBookingFragment.getInstance(id),
                     R.id.containerDetails, false)
+        }
+        val goBackImageButton: ImageButton = activity.findViewById<ImageButton>(R.id.goBackImageButton)
+        val titleTextView: TextView = activity.findViewById<TextView>(R.id.titleTextView)
+        titleTextView.text = "Регистрация"
+        goBackImageButton.visibility(true)
+        goBackImageButton.setOnClickListener {
+            goToExcursionDetails(id)
         }
     }
 
@@ -49,7 +69,6 @@ class ExcursionRouter(activity: ExcursionActivity) : BaseRouter<ExcursionActivit
     fun showSeatsError() {
         Toast.makeText(activity, "Превышено количство мест.", Toast.LENGTH_SHORT).show()
     }
-
 
 
 }

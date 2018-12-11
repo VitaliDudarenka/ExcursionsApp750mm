@@ -1,10 +1,13 @@
 package by.a750mm.excursionsapp750mm.presentation.screen.excursion.details
 
 import android.arch.lifecycle.ViewModelProviders
+import android.content.Intent
 import android.databinding.DataBindingUtil.setContentView
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.ImageView
+import android.widget.TextView
 import by.a750mm.excursionsapp750mm.R
 import by.a750mm.excursionsapp750mm.databinding.FragmentExcursionDetailsBinding
 import by.a750mm.excursionsapp750mm.presentation.base.BaseMvvmFragment
@@ -19,16 +22,13 @@ import by.a750mm.excursionsapp750mm.R.id.mapView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.MapView
 import by.a750mm.excursionsapp750mm.R.id.mapView
+import by.a750mm.excursionsapp750mm.presentation.screen.portfolio.PortfolioActivity
+import by.a750mm.excursionsapp750mm.presentation.utils.visibility
+import kotlinx.android.synthetic.main.activity_excursion.*
 
 
-class ExcursionDetailsFragment : BaseMvvmFragment<ExcursionDetailsViewModel, ExcursionRouter, FragmentExcursionDetailsBinding>(),
-        OnMapReadyCallback {
+class ExcursionDetailsFragment : BaseMvvmFragment<ExcursionDetailsViewModel, ExcursionRouter, FragmentExcursionDetailsBinding>() {
 
-
-    private lateinit var mapView: MapView
-    private val gmap: GoogleMap? = null
-
-    private val MAP_VIEW_BUNDLE_KEY = "MapViewBundleKey"
 
     companion object {
         private const val ID_EXTRA = "ID_EXTRA"
@@ -55,47 +55,7 @@ class ExcursionDetailsFragment : BaseMvvmFragment<ExcursionDetailsViewModel, Exc
         } else {
             router?.goBack()
         }
-        var mapViewBundle: Bundle? = null
-        if (savedInstanceState != null) {
-            mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY)
-        }
-
-        mapView = view.findViewById<MapView>(R.id.mapView)
-        mapView.onCreate(mapViewBundle)
-        mapView.getMapAsync(this)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        mapView.onResume()
-    }
-
-    override fun onStart() {
-        super.onStart()
-        mapView.onStart()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        mapView.onStop()
-    }
-
-    override fun onPause() {
-        mapView.onPause()
-        super.onPause()
-    }
-
-    override fun onDestroy() {
-        mapView.onDestroy()
-        super.onDestroy()
-    }
-
-    override fun onLowMemory() {
-        super.onLowMemory()
-        mapView.onLowMemory()
-    }
-
-    override fun onMapReady(googleMap: GoogleMap?) {
 
     }
+
 }

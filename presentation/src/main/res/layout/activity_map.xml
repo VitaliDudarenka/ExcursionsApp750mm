@@ -1,79 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:map="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <data>
+    <include
+        android:id="@+id/included"
+        layout="@layout/include_top_bar"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <variable
-            name="viewModel"
-            type="by.a750mm.excursionsapp750mm.presentation.screen.map.MapViewModel" />
-    </data>
+    <fragment
+        android:id="@+id/mapView"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+        app:layout_constraintTop_toBottomOf="@id/included"
+        tools:context="by.a750mm.excursionsapp750mm.presentation.screen.map.MapActivity"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp" />
 
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/bottomBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroudWhite"
-        android:orientation="vertical">
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <include
-            android:id="@+id/included"
-            layout="@layout/include_top_bar"
-            app:layout_constraintBottom_toTopOf="@id/container"
+        <ImageButton
+            android:id="@+id/buttonList"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:padding="5dp"
+            android:src="@drawable/icon_list"
+            app:layout_constraintEnd_toStartOf="@id/buttonMap"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toStartOf="parent"
+            android:scaleType="fitCenter"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
-            android:name="com.google.android.gms.maps.SupportMapFragment"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginTop="40dp"
-            app:initMap="@{viewModel.mMapLatLng}"
-            app:layout_constraintBottom_toTopOf="@+id/bottomBar"
+
+        <ImageButton
+            android:id="@+id/buttonMap"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_map"
+            app:layout_constraintEnd_toStartOf="@+id/buttonNews"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@+id/buttonList"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/bottomBar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_gravity="bottom"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <ImageView
-                android:id="@+id/buttonList"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimaryDark"
-                android:padding="5dp"
-                android:src="@drawable/icon_list"
-                app:layout_constraintEnd_toStartOf="@id/buttonMap"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageView
-                android:id="@+id/buttonMap"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                android:padding="5dp"
-                android:src="@drawable/icon_map"
-                app:layout_constraintEnd_toStartOf="@+id/buttonNews"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@+id/buttonList"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/buttonNews"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimaryDark"
-                android:padding="5dp"
-                android:src="@drawable/icon_news2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/buttonMap"
-                app:layout_constraintTop_toTopOf="parent" />
-        </android.support.constraint.ConstraintLayout>
+        <ImageButton
+            android:id="@+id/buttonNews"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimaryDark"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/icon_news2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_weight="1"
+            app:layout_constraintStart_toEndOf="@id/buttonMap"
+            app:layout_constraintTop_toTopOf="parent" />
     </android.support.constraint.ConstraintLayout>
-</layout>
+</android.support.constraint.ConstraintLayout>

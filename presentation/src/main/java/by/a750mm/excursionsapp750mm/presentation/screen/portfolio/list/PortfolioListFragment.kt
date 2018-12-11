@@ -8,6 +8,7 @@ import by.a750mm.excursionsapp750mm.R
 import by.a750mm.excursionsapp750mm.databinding.FragmentPortfolioListBinding
 import by.a750mm.excursionsapp750mm.presentation.base.BaseMvvmFragment
 import by.a750mm.excursionsapp750mm.presentation.screen.portfolio.PortfolioRouter
+import kotlinx.android.synthetic.main.fragment_excursion_list.*
 
 
 class PortfolioListFragment : BaseMvvmFragment<PortfolioListViewModel, PortfolioRouter, FragmentPortfolioListBinding>() {
@@ -34,6 +35,7 @@ class PortfolioListFragment : BaseMvvmFragment<PortfolioListViewModel, Portfolio
     override fun onDestroy() {
         super.onDestroy()
         viewModel.dismissAdapter()
+        listRecyclerView.adapter = null
     }
 
 }

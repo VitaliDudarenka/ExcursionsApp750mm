@@ -5,7 +5,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
 abstract class BaseActivity : FragmentActivity() {
-    protected val compositeDisposable: CompositeDisposable by lazy {
+    protected open val compositeDisposable: CompositeDisposable by lazy {
         CompositeDisposable()
     }
     protected fun addToDisposable(disposable: Disposable) {
