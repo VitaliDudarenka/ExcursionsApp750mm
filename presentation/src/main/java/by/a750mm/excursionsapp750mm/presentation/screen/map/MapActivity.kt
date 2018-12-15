@@ -1,10 +1,13 @@
 package by.a750mm.excursionsapp750mm.presentation.screen.map
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
+import android.support.v7.widget.PopupMenu
+import android.view.MenuItem
+import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import by.a750mm.excursionsapp750mm.R
 import by.a750mm.excursionsapp750mm.domain.entity.Excursion
@@ -21,6 +24,8 @@ import com.google.android.gms.maps.model.*
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
 import kotlinx.android.synthetic.main.activity_map.*
+import kotlinx.android.synthetic.main.include_bottom_bar.*
+import kotlinx.android.synthetic.main.include_top_bar.*
 import javax.inject.Inject
 
 private const val ID_EXTRA = "ID_EXTRA"
@@ -29,8 +34,8 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnInfoWind
     private var excursionList: List<Excursion> = emptyList()
     private lateinit var mMap: GoogleMap
     @Inject
-    public lateinit var excursionListUseCase: GetExcursionUseCase
-    val compositeDisposable: CompositeDisposable by lazy {
+    lateinit var excursionListUseCase: GetExcursionUseCase
+    private val compositeDisposable: CompositeDisposable by lazy {
         CompositeDisposable()
     }
 
@@ -47,13 +52,25 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnInfoWind
     }
 
 
+    @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContentView(R.layout.activity_map)
+
+        val clickListener = View.OnClickListener { view ->
+            when (view.id) {
+                R.id.menuImageButton -> {
+                    showPopup(view)
+                }
+            }
+        }
+
+        menuImageButton.setOnClickListener(clickListener)
+
         val mapFragment = supportFragmentManager.findFragmentById(R.id.mapView) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
 
+        buttonMap.setBackgroundColor(R.color.colorPrimary)
         buttonList.setOnClickListener {
             val intent = Intent(this, ExcursionActivity::class.java)
             startActivity(intent)
@@ -65,7 +82,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnInfoWind
         val goBackImageButton = findViewById<ImageButton>(R.id.goBackImageButton)
         val titleTextView = findViewById<TextView>(R.id.titleTextView)
         goBackImageButton.visibility(false)
-        titleTextView.text = "750MM.BY"
+        titleTextView.text = getString(R.string.title_750)
 
     }
 
@@ -82,7 +99,7 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnInfoWind
                     markerColor = BitmapDescriptorFactory.HUE_GREEN
                 }
                 val marker = mMap.addMarker(MarkerOptions().position(LatLng(latitude, longitude)).title(excursion.name)
-                        .snippet("Мест: " + excursion.seatsRest)
+                        .snippet(getString(R.string.seatsValue) + " " + excursion.seatsRest)
                         .icon(BitmapDescriptorFactory.defaultMarker(markerColor)))
                 marker.tag = excursion.id
                 builder.include(marker.position)
@@ -99,6 +116,23 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnInfoWind
         intent.putExtra(ID_EXTRA, marker.tag.toString())
         startActivity(intent)
     }
+
+    private fun showPopup(view: View) {
+        val popup: PopupMenu?
+        popup = PopupMenu(this, view)
+        popup.inflate(R.menu.popupmenu)
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
+            when (item!!.itemId) {
+                R.id.menu1 -> {
+                    finish()
+                    System.exit(0)
+                }
+            }
+            true
+        })
+        popup.show()
+    }
+
 }
 
 

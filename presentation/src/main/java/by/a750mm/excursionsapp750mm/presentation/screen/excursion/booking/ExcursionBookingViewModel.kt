@@ -4,11 +4,14 @@ import android.annotation.SuppressLint
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import by.a750mm.excursionsapp750mm.domain.entity.Booking
+import by.a750mm.excursionsapp750mm.domain.usecases.AddBookingUseCase
+import by.a750mm.excursionsapp750mm.domain.usecases.GetByIdUseCase
+import by.a750mm.excursionsapp750mm.presentation.app.App
 import by.a750mm.excursionsapp750mm.presentation.base.BaseViewModel
-import by.a750mm.excursionsapp750mm.presentation.factory.UseCaseProvider
 import by.a750mm.excursionsapp750mm.presentation.screen.excursion.ExcursionRouter
 import io.reactivex.rxkotlin.subscribeBy
 import java.text.SimpleDateFormat
+import javax.inject.Inject
 
 
 class ExcursionBookingViewModel : BaseViewModel<ExcursionRouter>() {
@@ -22,18 +25,20 @@ class ExcursionBookingViewModel : BaseViewModel<ExcursionRouter>() {
     val number = ObservableField<String>("")
     val note = ObservableField<String>("")
     val seatsBook = ObservableField<String>("0")
-
     private var excursionId: String? = null
-    private val excursionUseCase = UseCaseProvider.provideExcursionUseCase()
-    private val bookingUseCase = UseCaseProvider.provideAddBookingUseCase()
     val isProgressEnabled = ObservableBoolean(false)
     @SuppressLint("SimpleDateFormat")
-    val df2 = SimpleDateFormat("dd/MM/yyyy")
+    private val df2 = SimpleDateFormat("dd/MM/yyyy")
+    @Inject
+    lateinit var excursionUseCase: GetByIdUseCase
+    @Inject
+    lateinit var bookingUseCase: AddBookingUseCase
 
 
     fun setExcursionId(id: String) {
         if (excursionId != null) return
         excursionId = id
+        App.appComponent.inject(this)
         isProgressEnabled.set(true)
         val disposable = excursionUseCase.getById(id).subscribeBy(
                 onNext = {
@@ -62,9 +67,10 @@ class ExcursionBookingViewModel : BaseViewModel<ExcursionRouter>() {
             router?.showSeatsError()
             return
         }
-        val booking = Booking(id = System.currentTimeMillis().toString(), seats = Integer.parseInt(seatsBook.get()),
+        val booking = Booking(id = System.currentTimeMillis().toString(), seats = Integer.parseInt(seatsBook.get()!!),
                 name = name.get()!!, customerName = customerName.get()!!, customerSurname = customerSurname.get()!!,
                 number = number.get()!!, email = email.get()!!, note = note.get()!!)
+        App.appComponent.inject(this)
         val disposable = bookingUseCase.add(booking).subscribeBy(
                 onComplete = {
                     router!!.goToExcursionList()
@@ -83,25 +89,25 @@ class ExcursionBookingViewModel : BaseViewModel<ExcursionRouter>() {
 
     private fun checkRegForm(): Boolean {
         return !(customerName.get()!!.isEmpty() || customerSurname.get()!!.isEmpty() || number.get()!!.isEmpty() || email.get()!!.isEmpty()
-                || Integer.parseInt(seatsBook.get()) == 0)
+                || Integer.parseInt(seatsBook.get()!!) == 0)
     }
 
     fun onClickPlus() {
-        if (Integer.parseInt(seatsBook.get()) < seats.get()!!)
-            seatsBook.set((Integer.parseInt(seatsBook.get()) + 1).toString())
+        if (Integer.parseInt(seatsBook.get()!!) < seats.get()!!)
+            seatsBook.set((Integer.parseInt(seatsBook.get()!!) + 1).toString())
         else
             return
     }
 
     fun onClickMinus() {
-        if (Integer.parseInt(seatsBook.get()) > 0)
-            seatsBook.set((Integer.parseInt(seatsBook.get()) - 1).toString())
+        if (Integer.parseInt(seatsBook.get()!!) > 0)
+            seatsBook.set((Integer.parseInt(seatsBook.get()!!) - 1).toString())
         else
             return
     }
 
     private fun checkSeatsMax(): Boolean {
-        return Integer.parseInt(seatsBook.get()) <= seats.get()!!
+        return Integer.parseInt(seatsBook.get()!!) <= seats.get()!!
     }
 
 }

@@ -11,4 +11,21 @@
     <string name="book">Забронировать</string>
     <string name="form">Заполните форму:</string>
     <string name="title_activity_maps">Map</string>
+    <string name="title_smi">СМИ о нас</string>
+    <string name="registration">Регистрация</string>
+    <string name="book_add">Бронь принята. Ожидайте подтверждение.</string>
+    <string name="fill_fotms">Заполните обязательные поля формы.</string>
+    <string name="muchseats">Превышено количство мест.</string>
+    <string name="share">Поделиться</string>
+    <string name="title_750">750MM.BY</string>
+    <string name="plan">Планируется</string>
+    <string name="soon">Скоро поедем</string>
+    <string name="seatsRest">Осталось мест:</string>
+    <string name="seatsValue">Мест:</string>
+    <string name="shareDescription1">Я отправляюсь на экскурсию</string>
+    <string name="shareDescription2">с проектом 750mm.by. Поехали с нами!</string>
 </resources>
+
+
+
+

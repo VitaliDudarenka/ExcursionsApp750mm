@@ -9,6 +9,7 @@ import by.a750mm.excursionsapp750mm.domain.entity.Excursion
 import by.a750mm.excursionsapp750mm.domain.repositories.ExcursionRepository
 import io.reactivex.Observable
 
+@Suppress("NAME_SHADOWING")
 class ExcursionRepositoryImp(val apiService: RestService, val excursionDao: ExcursionDao) : ExcursionRepository {
 
 

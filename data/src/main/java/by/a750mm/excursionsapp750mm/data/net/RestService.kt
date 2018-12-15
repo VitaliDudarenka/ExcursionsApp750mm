@@ -1,6 +1,5 @@
 package by.a750mm.excursionsapp750mm.data.net
 
-import android.util.Log
 import by.a750mm.excursionsapp750mm.data.entity.BookingRequest
 import by.a750mm.excursionsapp750mm.data.entity.BookingResponse
 import by.a750mm.excursionsapp750mm.data.entity.ExcursionResponse
@@ -16,6 +15,7 @@ import java.util.concurrent.TimeUnit
 
 class RestService(private val apiUrl: String) {
     private val restApi: RestApi
+    private val restParser: RestErrorParser
 
     init {
         val okHttpBuilder = OkHttpClient.Builder()
@@ -25,6 +25,7 @@ class RestService(private val apiUrl: String) {
         okHttpBuilder.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
         val gson = GsonBuilder()
                 .create()
+        restParser = RestErrorParser(gson)
         val retrofit = Retrofit.Builder()
                 .baseUrl(apiUrl)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -35,24 +36,23 @@ class RestService(private val apiUrl: String) {
     }
 
     fun getExcursions(): Observable<List<ExcursionResponse>> {
-        return restApi.getExcursions()
+        return restApi.getExcursions().compose(restParser.parseError())
     }
 
     fun getExcursionById(id: String): Observable<ExcursionResponse> {
-        return restApi.getExcursionById(id)
+        return restApi.getExcursionById(id).compose(restParser.parseError())
     }
 
     fun getPortfolios(): Observable<List<PortfolioResponse>> {
-        return restApi.getPortfolios()
+        return restApi.getPortfolios().compose(restParser.parseError())
     }
 
     fun getPortfolioById(id: String): Observable<PortfolioResponse> {
-        return restApi.getPortfolioById(id)
+        return restApi.getPortfolioById(id).compose(restParser.parseError())
     }
 
     fun addBooking(booking: BookingRequest): Observable<BookingResponse> {
-        Log.e("CCC", booking.name)
-        return restApi.addBooking(booking)
+        return restApi.addBooking(booking).compose(restParser.parseError())
     }
 
 }

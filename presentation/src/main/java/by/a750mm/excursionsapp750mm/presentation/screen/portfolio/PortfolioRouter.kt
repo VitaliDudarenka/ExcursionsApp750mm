@@ -18,7 +18,7 @@ class PortfolioRouter(activity: PortfolioActivity) : BaseRouter<PortfolioActivit
         val goBackImageButton = activity.findViewById<ImageButton>(R.id.goBackImageButton)
         val titleTextView = activity.findViewById<TextView>(R.id.titleTextView)
         goBackImageButton.visibility(false)
-        titleTextView.text = "СМИ о нас"
+        titleTextView.text = activity.getString(R.string.title_smi)
     }
 
     fun goToPortfolioDetails(id: String) {
@@ -32,7 +32,7 @@ class PortfolioRouter(activity: PortfolioActivity) : BaseRouter<PortfolioActivit
         val goBackImageButton = activity.findViewById<ImageButton>(R.id.goBackImageButton)
         val titleTextView = activity.findViewById<TextView>(R.id.titleTextView)
         goBackImageButton.visibility(true)
-        titleTextView.text = "СМИ о нас"
+        titleTextView.text = activity.getString(R.string.title_smi)
         goBackImageButton.setOnClickListener {
             goToPortfolioList()
         }

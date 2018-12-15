@@ -4,14 +4,15 @@ import android.annotation.SuppressLint
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
 import android.util.Log
+import by.a750mm.excursionsapp750mm.R
+import by.a750mm.excursionsapp750mm.domain.usecases.GetByIdUseCase
+import by.a750mm.excursionsapp750mm.presentation.app.App
 import by.a750mm.excursionsapp750mm.presentation.base.BaseViewModel
-import by.a750mm.excursionsapp750mm.presentation.factory.UseCaseProvider
 import by.a750mm.excursionsapp750mm.presentation.screen.excursion.ExcursionRouter
 import io.reactivex.rxkotlin.subscribeBy
 import java.text.SimpleDateFormat
 import com.google.android.gms.maps.model.LatLng
-
-
+import javax.inject.Inject
 
 
 class ExcursionDetailsViewModel : BaseViewModel<ExcursionRouter>() {
@@ -22,18 +23,20 @@ class ExcursionDetailsViewModel : BaseViewModel<ExcursionRouter>() {
     val date = ObservableField<String>(" ")
     val seats = ObservableField<Int>(0)
     private var excursionId: String? = null
-    private val excursionUseCase = UseCaseProvider.provideExcursionUseCase()
     val isProgressEnabled = ObservableBoolean(false)
     val isExcursionEnabled = ObservableBoolean(false)
     var mMapLatLng = ObservableField<LatLng>(LatLng(53.9027, 27.5616))
-    val millis = System.currentTimeMillis() % 1000
+    private val millis = System.currentTimeMillis() % 1000
     @SuppressLint("SimpleDateFormat")
     val df2 = SimpleDateFormat("dd/MM/yyyy")
+    @Inject
+    lateinit var excursionUseCase: GetByIdUseCase
 
 
     fun setExcursionId(id: String) {
         if (excursionId != null) return
         excursionId = id
+        App.appComponent.inject(this)
         isProgressEnabled.set(true)
         val disposable = excursionUseCase.getById(id).subscribeBy(
                 onNext = {
@@ -66,7 +69,6 @@ class ExcursionDetailsViewModel : BaseViewModel<ExcursionRouter>() {
     }
 
     fun onClickGo() {
-        Log.e("AAA", excursionId)
         if (excursionId != null) {
             router!!.goToExcursionBooking(excursionId!!)
         } else {
@@ -74,8 +76,8 @@ class ExcursionDetailsViewModel : BaseViewModel<ExcursionRouter>() {
         }
     }
 
-    fun onClickDelete() {
-
+    fun onClickShare() {
+        router!!.share(name.get()!!)
     }
 
     override fun onCleared() {

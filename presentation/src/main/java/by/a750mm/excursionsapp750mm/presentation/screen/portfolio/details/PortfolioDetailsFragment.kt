@@ -4,8 +4,6 @@ import android.arch.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.View
 import android.webkit.WebView
-import android.widget.ProgressBar
-import android.widget.TextView
 import by.a750mm.excursionsapp750mm.R
 import by.a750mm.excursionsapp750mm.databinding.FragmentPortfolioDetailsBinding
 import by.a750mm.excursionsapp750mm.presentation.base.BaseMvvmFragment

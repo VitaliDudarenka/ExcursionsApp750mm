@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import by.a750mm.excursionsapp750mm.BR
 
+@Suppress("UNCHECKED_CAST")
 abstract class BaseMvvmFragment<VM : BaseViewModel<R>, R : BaseRouter<*>, B : ViewDataBinding> : BaseFragment() {
     protected lateinit var viewModel: VM
     abstract fun provideViewModel(): VM

@@ -2,27 +2,30 @@ package by.a750mm.excursionsapp750mm.presentation.screen.portfolio.details
 
 import android.databinding.ObservableBoolean
 import android.databinding.ObservableField
-import by.a750mm.excursionsapp750mm.presentation.base.BaseViewModel
-import by.a750mm.excursionsapp750mm.presentation.factory.UseCaseProvider
-import by.a750mm.excursionsapp750mm.presentation.screen.portfolio.PortfolioRouter
-import io.reactivex.rxkotlin.subscribeBy
-import android.databinding.Bindable
-import android.webkit.WebViewClient
-import android.webkit.WebView
 import android.webkit.WebResourceError
 import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import by.a750mm.excursionsapp750mm.domain.usecases.GetPortfolioByIdUseCase
+import by.a750mm.excursionsapp750mm.presentation.app.App
+import by.a750mm.excursionsapp750mm.presentation.base.BaseViewModel
+import by.a750mm.excursionsapp750mm.presentation.screen.portfolio.PortfolioRouter
+import io.reactivex.rxkotlin.subscribeBy
+import javax.inject.Inject
 
 
 class PortfolioDetailsViewModel : BaseViewModel<PortfolioRouter>() {
     val name = ObservableField<String>(" ")
     val articleUrl = ObservableField<String>(" ")
     private var portfolioId: String? = null
-    private val portfolioUseCase = UseCaseProvider.providePortfolioUseCase()
     val isProgressEnabled = ObservableBoolean(false)
+    @Inject
+    lateinit var portfolioUseCase: GetPortfolioByIdUseCase
 
     fun setPortfolioId(id: String) {
         if (portfolioId != null) return
         portfolioId = id
+        App.appComponent.inject(this)
         isProgressEnabled.set(true)
         val disposable = portfolioUseCase.getById(id).subscribeBy(
                 onNext = {

@@ -13,7 +13,7 @@ class ExcursionListViewModel : BaseViewModel<ExcursionRouter>() {
     var adapter: ExcursionListAdapter? = ExcursionListAdapter()
     val isProgressEnabled = ObservableBoolean(false)
     @Inject
-    public lateinit var excursionListUseCase: GetExcursionUseCase
+    lateinit var excursionListUseCase: GetExcursionUseCase
 
 
     init {

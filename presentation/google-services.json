@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "46046412570",
+    "firebase_url": "https://excursionsapp750mm-b5378.firebaseio.com",
+    "project_id": "excursionsapp750mm-b5378",
+    "storage_bucket": "excursionsapp750mm-b5378.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:46046412570:android:03864900be62d331",
+        "android_client_info": {
+          "package_name": "by.a750mm.excursions750mm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "46046412570-lfqu73ka6gkig2kdc6abf4o2v3vk4jr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDK92eJ_7ZFGN692SC2WfTAave3UKXd3h4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

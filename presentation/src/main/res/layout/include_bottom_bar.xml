@@ -4,30 +4,44 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:layout_gravity="bottom">
+    android:layout_gravity="bottom"
+    android:orientation="vertical">
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonList"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        app:layout_constraintHorizontal_weight="1"
+        android:background="@color/colorPrimaryDark"
+        android:padding="5dp"
+        android:src="@drawable/icon_list"
         app:layout_constraintEnd_toStartOf="@id/buttonMap"
+        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="fitCenter"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+
+    <ImageButton
         android:id="@+id/buttonMap"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_map"
         app:layout_constraintEnd_toStartOf="@+id/buttonNews"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@+id/buttonList"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
+    <ImageButton
         android:id="@+id/buttonNews"
         android:layout_width="0dp"
         android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:padding="5dp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/icon_news2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintStart_toEndOf="@id/buttonMap"
