@@ -37,7 +37,6 @@ class ExcursionDetailsFragment : BaseMvvmFragment<ExcursionDetailsViewModel, Exc
         } else {
             router?.goBack()
         }
-
     }
 
 }

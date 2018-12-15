@@ -4,10 +4,9 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.FragmentActivity
-import android.support.v7.widget.PopupMenu
-import android.view.MenuItem
-import android.view.View
+import android.util.Log
 import android.widget.ImageButton
+import android.widget.PopupMenu
 import android.widget.TextView
 import by.a750mm.excursionsapp750mm.R
 import by.a750mm.excursionsapp750mm.domain.entity.Excursion
@@ -23,9 +22,7 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.subscribeBy
-import kotlinx.android.synthetic.main.activity_map.*
 import kotlinx.android.synthetic.main.include_bottom_bar.*
-import kotlinx.android.synthetic.main.include_top_bar.*
 import javax.inject.Inject
 
 private const val ID_EXTRA = "ID_EXTRA"
@@ -57,19 +54,25 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnInfoWind
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_map)
 
-        val clickListener = View.OnClickListener { view ->
-            when (view.id) {
-                R.id.menuImageButton -> {
-                    showPopup(view)
-                }
-            }
-        }
-
-        menuImageButton.setOnClickListener(clickListener)
-
         val mapFragment = supportFragmentManager.findFragmentById(R.id.mapView) as? SupportMapFragment
         mapFragment?.getMapAsync(this)
 
+        val menuButton = findViewById<ImageButton>(R.id.menuImageButton)
+        menuButton.setOnClickListener {
+            Log.e("AAA", "click")
+            val popupMenu: android.widget.PopupMenu = android.widget.PopupMenu(this, menuButton)
+            popupMenu.menuInflater.inflate(R.menu.popupmenu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.menu1 -> {
+                        finish()
+                        System.exit(0)
+                    }
+                }
+                true
+            })
+            popupMenu.show()
+        }
         buttonMap.setBackgroundColor(R.color.colorPrimary)
         buttonList.setOnClickListener {
             val intent = Intent(this, ExcursionActivity::class.java)
@@ -116,23 +119,6 @@ class MapActivity : FragmentActivity(), OnMapReadyCallback, GoogleMap.OnInfoWind
         intent.putExtra(ID_EXTRA, marker.tag.toString())
         startActivity(intent)
     }
-
-    private fun showPopup(view: View) {
-        val popup: PopupMenu?
-        popup = PopupMenu(this, view)
-        popup.inflate(R.menu.popupmenu)
-        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
-            when (item!!.itemId) {
-                R.id.menu1 -> {
-                    finish()
-                    System.exit(0)
-                }
-            }
-            true
-        })
-        popup.show()
-    }
-
 }
 
 

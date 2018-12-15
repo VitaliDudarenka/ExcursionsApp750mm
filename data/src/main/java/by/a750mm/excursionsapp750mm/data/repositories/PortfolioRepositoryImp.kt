@@ -10,7 +10,7 @@ import by.a750mm.excursionsapp750mm.domain.entity.Portfolio
 import by.a750mm.excursionsapp750mm.domain.repositories.PortfolioRepository
 import io.reactivex.Observable
 
-class PortfolioRepositoryImp(val apiService: RestService, val portfolioDao: PortfolioDao) : PortfolioRepository {
+class PortfolioRepositoryImp(private val apiService: RestService, private val portfolioDao: PortfolioDao) : PortfolioRepository {
 
 
     companion object {

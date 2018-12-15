@@ -39,7 +39,7 @@ class ExcursionListFragment : BaseMvvmFragment<ExcursionListViewModel, Excursion
     override fun onDestroy() {
         super.onDestroy()
         viewModel.dismissAdapter()
-        listRecyclerView.adapter = null
+        binding.listRecyclerView.adapter = null
     }
 
 }

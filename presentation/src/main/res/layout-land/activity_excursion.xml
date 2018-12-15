@@ -13,6 +13,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <include
+            android:id="@+id/included"
+            layout="@layout/include_top_bar"
+            app:layout_constraintBottom_toTopOf="@id/container"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <LinearLayout
             android:layout_width="595dp"
@@ -34,49 +39,12 @@
 
         </LinearLayout>
 
-        <android.support.constraint.ConstraintLayout
+        <include
             android:id="@+id/bottomBar"
+            layout="@layout/include_bottom_bar"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_gravity="bottom"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <ImageView
-                android:id="@+id/buttonListE"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimary"
-                android:padding="5dp"
-                android:src="@drawable/icon_list"
-                app:layout_constraintEnd_toStartOf="@id/buttonMapE"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-            <ImageView
-                android:id="@+id/buttonMapE"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimaryDark"
-                android:padding="5dp"
-                android:src="@drawable/icon_map"
-                app:layout_constraintEnd_toStartOf="@+id/buttonNewsE"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@+id/buttonListE"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/buttonNewsE"
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:background="@color/colorPrimaryDark"
-                android:padding="5dp"
-                android:src="@drawable/icon_news2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_weight="1"
-                app:layout_constraintStart_toEndOf="@id/buttonMapE"
-                app:layout_constraintTop_toTopOf="parent" />
-        </android.support.constraint.ConstraintLayout>
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </android.support.constraint.ConstraintLayout>
 </layout>

@@ -3,12 +3,13 @@ package by.a750mm.excursionsapp750mm.presentation.screen.excursion
 import android.annotation.SuppressLint
 import android.arch.lifecycle.ViewModelProviders
 import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v7.app.AppCompatDelegate
-import android.support.v7.widget.PopupMenu
-import android.view.MenuItem
-import android.view.View
+import android.util.Log
+import android.widget.ImageButton
+import android.widget.PopupMenu
 import android.widget.TextView
 import by.a750mm.excursionsapp750mm.R
 import by.a750mm.excursionsapp750mm.databinding.ActivityExcursionBinding
@@ -16,7 +17,6 @@ import by.a750mm.excursionsapp750mm.presentation.base.BaseMvvmActivity
 import by.a750mm.excursionsapp750mm.presentation.screen.map.MapActivity
 import by.a750mm.excursionsapp750mm.presentation.screen.portfolio.PortfolioActivity
 import kotlinx.android.synthetic.main.include_bottom_bar.*
-import kotlinx.android.synthetic.main.include_top_bar.*
 
 
 private const val ID_EXTRA = "ID_EXTRA"
@@ -37,17 +37,7 @@ class ExcursionActivity : BaseMvvmActivity<ExcursionViewModel, ExcursionRouter, 
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_excursion)
-        val clickListener = View.OnClickListener { view ->
-            when (view.id) {
-                R.id.menuImageButton -> {
-                    showPopup(view)
-                }
-            }
-        }
-
-        menuImageButton.setOnClickListener(clickListener)
-
+        requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
 
         AppCompatDelegate.setCompatVectorFromResourcesEnabled(true)
         if (intent.getStringExtra(ID_EXTRA) == null) {
@@ -56,9 +46,25 @@ class ExcursionActivity : BaseMvvmActivity<ExcursionViewModel, ExcursionRouter, 
             router.goToExcursionDetails(intent.getStringExtra(ID_EXTRA))
         }
 
-
         val binding: ActivityExcursionBinding = DataBindingUtil.setContentView(this, R.layout.activity_excursion)
         binding.viewModel = ExcursionViewModel()
+
+        val menuButton = findViewById<ImageButton>(R.id.menuImageButton)
+        menuButton.setOnClickListener {
+            Log.e("AAA", "click")
+            val popupMenu: PopupMenu = PopupMenu(this, menuButton)
+            popupMenu.menuInflater.inflate(R.menu.popupmenu, popupMenu.menu)
+            popupMenu.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.menu1 -> {
+                        finish()
+                        System.exit(0)
+                    }
+                }
+                true
+            })
+            popupMenu.show()
+        }
 
         buttonList.setBackgroundColor(R.color.colorPrimary)
         buttonList.setOnClickListener {
@@ -78,21 +84,6 @@ class ExcursionActivity : BaseMvvmActivity<ExcursionViewModel, ExcursionRouter, 
         titleTextView.text = getString(R.string.title_750)
     }
 
-    private fun showPopup(view: View) {
-        val popup: PopupMenu?
-        popup = PopupMenu(this, view)
-        popup.inflate(R.menu.popupmenu)
-        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item: MenuItem? ->
-            when (item!!.itemId) {
-                R.id.menu1 -> {
-                    finish()
-                    System.exit(0)
-                }
-            }
-            true
-        })
-        popup.show()
-    }
 
 }
 

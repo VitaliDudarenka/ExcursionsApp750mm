@@ -10,7 +10,7 @@ import by.a750mm.excursionsapp750mm.domain.repositories.ExcursionRepository
 import io.reactivex.Observable
 
 @Suppress("NAME_SHADOWING")
-class ExcursionRepositoryImp(val apiService: RestService, val excursionDao: ExcursionDao) : ExcursionRepository {
+class ExcursionRepositoryImp(private val apiService: RestService, val excursionDao: ExcursionDao) : ExcursionRepository {
 
 
     companion object {
@@ -51,6 +51,7 @@ class ExcursionRepositoryImp(val apiService: RestService, val excursionDao: Excu
                         }
                     }
                 }
+
 
     }
 

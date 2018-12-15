@@ -27,7 +27,7 @@ class App : Application() {
                 .build()
         super.onCreate()
         Fabric.with(this, Crashlytics())
-        MapsInitializer.initialize(this);
+        MapsInitializer.initialize(this)
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return
         }
